@@ -23,10 +23,6 @@ const markdown = MarkdownIt({
  * await getFilePaths('dir/share')
  */
 export async function getMarkdownPaths(dir: string, ...options: string[]): Promise<any> {
-  if (/[<>:"\\|?*]/.test(dir)) {
-    throw new Error('The directory name is invalid.')
-  }
-
   const entries = await readdir(dir, { withFileTypes: true })
 
   const paths = await Promise.all(
@@ -38,7 +34,7 @@ export async function getMarkdownPaths(dir: string, ...options: string[]): Promi
       return entry.name.endsWith('.md') ? _fullpath.replaceAll('\\', '/').replaceAll(/index\.md$/g, '') : ['']
     })
   )
-  return paths.flat(Infinity)
+  return paths.flat(Infinity).filter(Boolean)
 }
 
 /**
