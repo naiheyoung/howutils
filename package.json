@@ -28,7 +28,7 @@
   "scripts": {
     "build": "cross-env BUILD_TARGET=node vite build",
     "prepublishOnly": "pnpm build",
-    "deploy": "pnpm publish --access public",
+    "remote": "pnpm publish --access public",
     "test": "jest --config ./jest.config.ts"
   },
   "keywords": [

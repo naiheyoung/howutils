@@ -1,6 +1,7 @@
 # dev tools
 .idea
 .vscode
+.npmrc
 
 # Logs
 logs
