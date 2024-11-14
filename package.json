@@ -1,6 +1,6 @@
 {
   "name": "@naiheyoung/utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "packageManager": "pnpm@9.12.3",
   "description": "Created for distribution.",
