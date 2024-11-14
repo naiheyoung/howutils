@@ -10,19 +10,20 @@ const markdown = MarkdownIt({
 })
 
 /**
- * Given a directory name, return all the file paths under it.
+ * Given a directory name, returns the markdown routing path.
  *
  * @param {string} dir target directory
  * @param {...string[]} options Additional Configuration Items
+ * @param {string} options[0] Directories to ignore
  *
  * @throws {Error} If the directory name is illegal, an exception will be thrown. (/[<>:"\\|?*]/)
  *
  * @returns {Promise<DirectoryItem[]>}
  *
  * @example
- * await getFilePaths('dir/share')
+ * await markdownToPaths('dir/share')
  */
-export async function getMarkdownPaths(dir: string, ...options: string[]): Promise<any> {
+export async function markdownToPaths(dir: string, ...options: string[]): Promise<any> {
   const entries = await readdir(dir, { withFileTypes: true })
   let regex: RegExp
   if (options[0]) {
@@ -36,7 +37,7 @@ export async function getMarkdownPaths(dir: string, ...options: string[]): Promi
     entries.map(async (entry) => {
       const _fullpath = join(dir, entry.name)
       if (entry.isDirectory()) {
-        return await getMarkdownPaths(_fullpath, ...options)
+        return await markdownToPaths(_fullpath, ...options)
       }
       if (options[0]) {
         return entry.name.endsWith('.md')
