@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import { VitePluginNode } from 'vite-plugin-node'
-import dts from 'rollup-plugin-dts'
 import esbuild from 'rollup-plugin-esbuild'
 
 export default defineConfig({
@@ -23,7 +22,6 @@ export default defineConfig({
           'gray-matter': 'matter',
           'markdown-it': 'markdownit'
         },
-        entryFileNames: 'index.d.ts',
         format: 'esm',
       }
     }
@@ -32,9 +30,6 @@ export default defineConfig({
     ...VitePluginNode({
       adapter: 'express',
       appPath: './src/index.ts'
-    }),
-    dts({
-      respectExternal: true
     }),
     esbuild({
       target: 'esnext'
