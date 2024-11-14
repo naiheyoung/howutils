@@ -24,14 +24,29 @@ const markdown = MarkdownIt({
  */
 export async function getMarkdownPaths(dir: string, ...options: string[]): Promise<any> {
   const entries = await readdir(dir, { withFileTypes: true })
+  let regex: RegExp
+  if (options[0]) {
+    regex = new RegExp(
+      `^${options[0].replace(/[.*+?^=!:${}()|\[\]\/\\]/g, '\\$&')}`,
+      'g'
+    )
+  }
 
   const paths = await Promise.all(
     entries.map(async (entry) => {
       const _fullpath = join(dir, entry.name)
       if (entry.isDirectory()) {
-        return await getMarkdownPaths(_fullpath)
+        return await getMarkdownPaths(_fullpath, ...options)
       }
-      return entry.name.endsWith('.md') ? _fullpath.replaceAll('\\', '/').replaceAll(/index\.md$/g, '') : ['']
+      if (options[0]) {
+        return entry.name.endsWith('.md')
+          ? _fullpath
+            .replaceAll('\\', '/')
+            .replaceAll(/\.md$/g, '')
+            .replace(regex, '')
+          : ['']
+      }
+      return entry.name.endsWith('.md') ? _fullpath.replaceAll('\\', '/').replaceAll(/\.md$/g, '') : ['']
     })
   )
   return paths.flat(Infinity).filter(Boolean)
