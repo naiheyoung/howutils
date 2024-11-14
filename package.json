@@ -28,7 +28,7 @@
   "scripts": {
     "build": "cross-env BUILD_TARGET=node vite build",
     "build:dts": "rollup -c rollup.config.js",
-    "prepublishOnly": "npm version patch && pnpm build && pnpm build:dts",
+    "prepublishOnly": "pnpm build && pnpm build:dts",
     "remote": "pnpm publish --access public",
     "test": "jest --config ./jest.config.ts"
   },
