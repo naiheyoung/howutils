@@ -1,0 +1,41 @@
+{
+  "name": "@naiheyoung/utils",
+  "version": "1.0.0",
+  "packageManager": "pnpm@9.12.3",
+  "description": "Created for distribution.",
+  "homepage": "https://github.com/naiheyoung/howutils#reamde",
+  "repository": {
+    "type": "github",
+    "url": "git@github.com:naiheyoung/howutils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/naiheyoung/howutils/issues"
+  },
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "prepublishOnly": "pnpm build",
+    "deploy": "pnpm publish --access public",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "test",
+    "utils",
+    "naiheyoung"
+  ],
+  "author": "Naihe <naiheemail@yeah.net>",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup-plugin-dts": "^6.1.1",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
